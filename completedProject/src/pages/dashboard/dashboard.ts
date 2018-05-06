@@ -1,6 +1,6 @@
 import { DashItem } from './../../models/dash-item.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 /**
  * Generated class for the DashboardPage page.
@@ -16,11 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DashboardPage {
   public dashItems: DashItem[][];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController) {
 
-    const top    = [new DashItem("Film", "film"), new DashItem("People", 'people')];
-    const middle = [new DashItem("Planets", 'planet'), new DashItem("Species", 'bug')];
-    const bottom = [new DashItem('Vehicals', 'car'), new DashItem('Starships','jet')];
+    const top    = [new DashItem("Films", "film", 'FilmsPage'), new DashItem("People", 'people', '')];
+    const middle = [new DashItem("Planets", 'planet', ''), new DashItem("Species", 'bug', '')];
+    const bottom = [new DashItem('Vehicles', 'car', ''), new DashItem('Starships','jet', '')];
 
     this.dashItems = [top, middle, bottom];
 
@@ -32,8 +32,10 @@ export class DashboardPage {
   /**
    * 
    */
-  public onTap(): void {
-    console.log("Hello World");
+  public onTap(page: string): void {
+    if(page !== '') {
+      this.navCtrl.push(page);
+    }
   }
 
 }

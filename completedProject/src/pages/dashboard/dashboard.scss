@@ -2,6 +2,7 @@ page-dashboard {
 
     ion-grid {
         height: 100%;
+        border-left: 1px solid color($colors, secondary, base);
     }
 
     ion-row {
@@ -11,8 +12,8 @@ page-dashboard {
     ion-col {
         height: 100%;
         position: relative;
-        border-bottom: 1px solid lightgrey;
-        border-right: 1px solid lightgrey;
+        border-bottom: 1px solid color($colors, secondary, base);
+        border-right: 1px solid color($colors, secondary, base);
 
         dash-item {
             position: absolute;

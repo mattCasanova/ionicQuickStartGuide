@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>Star Wars</ion-title>
   </ion-navbar>
 
@@ -17,7 +17,7 @@
 
   <ion-grid no-padding>
     <ion-row *ngFor="let row of dashItems">
-      <ion-col *ngFor="let item of row"  tappable (tap)="onTap()">
+      <ion-col *ngFor="let item of row"  tappable (tap)="onTap(item.page)">
         <dash-item [icon]="item.icon" [title]="item.title"></dash-item>
       </ion-col>
     </ion-row>
