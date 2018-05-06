@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>dashboard</ion-title>
+    <ion-title>Star Wars</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,30 +16,9 @@
 <ion-content>
 
   <ion-grid no-padding>
-    <ion-row>
-      <ion-col>
-      </ion-col>
-      <ion-col>
-      </ion-col>
-    </ion-row>
-      
-    <ion-row>
-      <ion-col>
-
-      </ion-col>
-      
-      <ion-col>
-
-      </ion-col>
-      
-    </ion-row>
-    
-    <ion-row>
-      <ion-col>
-
-      </ion-col>
-      <ion-col>
-
+    <ion-row *ngFor="let row of dashItems">
+      <ion-col *ngFor="let item of row"  tappable (tap)="onTap()">
+        <dash-item [icon]="item.icon" [title]="item.title"></dash-item>
       </ion-col>
     </ion-row>
   </ion-grid>

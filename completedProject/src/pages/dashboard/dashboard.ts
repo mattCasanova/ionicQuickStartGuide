@@ -1,3 +1,4 @@
+import { DashItem } from './../../models/dash-item.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -14,12 +15,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
-
+  public dashItems: DashItem[][];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    const top    = [new DashItem("Film", "film"), new DashItem("People", 'people')];
+    const middle = [new DashItem("Planets", 'planet'), new DashItem("Species", 'bug')];
+    const bottom = [new DashItem('Vehicals', 'car'), new DashItem('Starships','jet')];
+
+    this.dashItems = [top, middle, bottom];
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
+  }
+
+  /**
+   * 
+   */
+  public onTap(): void {
+    console.log("Hello World");
   }
 
 }

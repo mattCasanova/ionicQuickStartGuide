@@ -9,8 +9,19 @@ page-dashboard {
     }
 
     ion-col {
+        height: 100%;
+        position: relative;
         border-bottom: 1px solid lightgrey;
         border-right: 1px solid lightgrey;
+
+        dash-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
     }
+
 
 }
