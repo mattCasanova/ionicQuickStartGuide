@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
+import { Film } from '../../models/film.model';
 
 /**
  * Generated class for the FilmsListPage page.
@@ -15,14 +16,28 @@ import { ApiProvider } from '../../providers/api/api';
   templateUrl: 'films-list.html',
 })
 export class FilmsListPage {
-  public films: any[];
-  constructor(public navCtrl: NavController, private api: ApiProvider) {
+  public films: Film[];
+  constructor(
+    private navCtrl: NavController, 
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private api: ApiProvider) {
   }
 
   ionViewDidLoad() {
-    this.api.getFilms().subscribe((films: any[]) => {
-      console.log(films)
-      this.films = films['results'];
+    const loader = this.loadingCtrl.create();
+    loader.present();
+    this.api.getFilms((films: Film[]) => {
+      this.films = films;
+      loader.dismiss();
+    },
+    (error: any) => {
+      loader.dismiss();
+      const alert = this.alertCtrl.create({
+        title: error.name,
+        message: error.message
+      });
+      alert.present();
     });
   }
 

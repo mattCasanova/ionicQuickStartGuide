@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take'
+import { Film } from '../../models/film.model';
 
 /*
   Generated class for the ApiProvider provider.
@@ -16,9 +17,13 @@ export class ApiProvider {
   constructor(private http: HttpClient) {
   }
 
-  public getFilms(): Observable<any[]> {
+  public getFilms(onSuccess:(films: Film[]) => void, onError: (error: any) => void) {
     const url = ApiProvider.BASE_URL + 'films';
-    return this.http.get<any[]>(url).take(1);
+    this.http.get<any[]>(url)
+      .take(1)
+      .subscribe(response => {
+        onSuccess(response['results']);
+      }, onError);
   }
 
   public getPeople(): Observable<any[]> {
