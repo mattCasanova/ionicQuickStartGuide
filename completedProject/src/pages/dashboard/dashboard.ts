@@ -1,3 +1,6 @@
+import { Icons } from './../../Constants/icons.constants';
+import { Titles } from './../../Constants/titles.constants';
+import { Pages } from './../../Constants/pages.constants';
 import { DashItem } from './../../models/dash-item.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
@@ -18,24 +21,29 @@ export class DashboardPage {
   public dashItems: DashItem[][];
   constructor(private navCtrl: NavController) {
 
-    const top    = [new DashItem("Films", "film", 'FilmsPage'), new DashItem("People", 'people', '')];
-    const middle = [new DashItem("Planets", 'planet', ''), new DashItem("Species", 'bug', '')];
-    const bottom = [new DashItem('Vehicles', 'car', ''), new DashItem('Starships','jet', '')];
+    const top    = [
+      new DashItem(Titles.FILMS,  Icons.FILM,   Pages.FILMS_LIST), 
+      new DashItem(Titles.PEOPLE, Icons.PEOPLE, Pages.PLANETS_LIST)
+    ];
+
+    const middle = [
+      new DashItem(Titles.PLANETS, Icons.PLANET,  Pages.PLANETS_LIST), 
+      new DashItem(Titles.SPECIES, Icons.SPECIES, Pages.SPECIES_LIST)
+    ];
+
+    const bottom = [
+      new DashItem(Titles.VEHICLES,  Icons.VEHICLE,  Pages.VEHICLES_LIST), 
+      new DashItem(Titles.STARSHIPS, Icons.STARSHIP, Pages.STARSHIPS_LIST)
+    ];
 
     this.dashItems = [top, middle, bottom];
 
   }
-
-  ionViewDidLoad() {
-  }
-
   /**
    * 
    */
   public onTap(page: string): void {
-    if(page !== '') {
-      this.navCtrl.push(page);
-    }
+    this.navCtrl.push(page);
   }
 
 }
