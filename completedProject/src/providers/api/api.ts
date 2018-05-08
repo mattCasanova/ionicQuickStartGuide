@@ -17,6 +17,11 @@ export class ApiProvider {
   constructor(private http: HttpClient) {
   }
 
+  /**
+   * 
+   * @param onSuccess Closure to Call when api returns success
+   * @param onError Closure to call when api returns error
+   */
   public getFilms(onSuccess:(films: Film[]) => void, onError: (error: any) => void) {
     const url = ApiProvider.BASE_URL + 'films';
     this.http.get<any[]>(url)

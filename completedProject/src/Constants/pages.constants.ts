@@ -6,4 +6,6 @@ export class Pages {
     public static readonly VEHICLES_LIST                                 = 'VehiclesListPage';
     public static readonly STARSHIPS_LIST                                = 'StarshipsListPage';
 
+    public static readonly FILM_DETAIL                                   = 'FilmDetailPage';
+
 }
