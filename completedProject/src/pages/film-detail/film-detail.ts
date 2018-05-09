@@ -1,6 +1,6 @@
 import { DetailItem } from './../../models/detail-item.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 import { Film } from '../../models/film.model';
 import { DatePipe } from '@angular/common';
 import { Strings } from '../../Constants/strings.constants';
@@ -25,7 +25,6 @@ export class FilmDetailPage {
    * 
    */
   constructor(
-    private navCtrl: NavController, 
     navParams: NavParams) {
       this.film = navParams.data;
   }

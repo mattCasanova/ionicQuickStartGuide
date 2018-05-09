@@ -23,7 +23,7 @@ export class DashboardPage {
 
     const top    = [
       new DashItem(Titles.FILMS,  Icons.FILM,   Pages.FILMS_LIST), 
-      new DashItem(Titles.PEOPLE, Icons.PEOPLE, Pages.PLANETS_LIST)
+      new DashItem(Titles.PEOPLE, Icons.PEOPLE, Pages.PEOPLE_LIST)
     ];
 
     const middle = [

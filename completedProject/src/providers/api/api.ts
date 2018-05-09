@@ -1,7 +1,7 @@
+import { Person } from './../../models/person.model';
 import { APIResult } from './../../models/api-result.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take'
 import { Film } from '../../models/film.model';
 
@@ -20,18 +20,11 @@ export class ApiProvider {
 
   /**
    * 
-   */
-  public getResult(url: string, onSuccess: (apiResult: APIResult) => void, onError: (error: any) => void) {
-    this.http.get<APIResult>(url).take(1).subscribe(onSuccess, onError);
-  }
-
-  /**
-   * 
    * @param onSuccess Closure to Call when api returns success
    * @param onError Closure to call when api returns error
    */
   public getFilms(onSuccess:(films: Film[]) => void, onError: (error: any) => void) {
-    const url = ApiProvider.BASE_URL + 'films';
+    const url = ApiProvider.BASE_URL + 'films/';
     this.http.get<APIResult>(url)
       .take(1)
       .subscribe((apiResult: APIResult) => {
@@ -39,9 +32,24 @@ export class ApiProvider {
       }, onError);
   }
 
-  public getPeople(onSuccess: (apiResult: APIResult) => void, onError: (error: any) => void) {
-    const url = ApiProvider.BASE_URL + 'people';
-    return this.http.get<APIResult>(url).take(1).subscribe(onSuccess, onError);
+  public getPeople(onSuccess: (people: Person[]) => void, onError: (error: any) => void) {
+    const url = ApiProvider.BASE_URL + 'people/';
+    let results: Person[] = [];
+
+    
+    const recursiveGet = (apiResult: APIResult) => {
+      results = results.concat(apiResult.results);
+      if(apiResult.next) {
+        this.http.get<APIResult>(apiResult.next).take(1).subscribe(recursiveGet, onError);
+      } else {
+        onSuccess(results);
+      }
+    }
+    
+
+    this.http.get<APIResult>(url)
+      .take(1)
+      .subscribe(recursiveGet, onError);
   }
 
 }

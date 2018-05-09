@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>PeopleList</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let person of people" (tap)="onTap(person)">
+      {{person.name}}
+    </button>
+  </ion-list>
 </ion-content>
