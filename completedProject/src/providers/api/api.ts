@@ -1,3 +1,4 @@
+import { APIResult } from './../../models/api-result.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -19,21 +20,28 @@ export class ApiProvider {
 
   /**
    * 
+   */
+  public getResult(url: string, onSuccess: (apiResult: APIResult) => void, onError: (error: any) => void) {
+    this.http.get<APIResult>(url).take(1).subscribe(onSuccess, onError);
+  }
+
+  /**
+   * 
    * @param onSuccess Closure to Call when api returns success
    * @param onError Closure to call when api returns error
    */
   public getFilms(onSuccess:(films: Film[]) => void, onError: (error: any) => void) {
     const url = ApiProvider.BASE_URL + 'films';
-    this.http.get<any[]>(url)
+    this.http.get<APIResult>(url)
       .take(1)
-      .subscribe(response => {
-        onSuccess(response['results']);
+      .subscribe((apiResult: APIResult) => {
+        onSuccess(apiResult.results);
       }, onError);
   }
 
-  public getPeople(): Observable<any[]> {
+  public getPeople(onSuccess: (apiResult: APIResult) => void, onError: (error: any) => void) {
     const url = ApiProvider.BASE_URL + 'people';
-    return this.http.get<any[]>(url).take(1);
+    return this.http.get<APIResult>(url).take(1).subscribe(onSuccess, onError);
   }
 
 }

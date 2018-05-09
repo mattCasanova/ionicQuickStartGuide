@@ -16,17 +16,9 @@
 
   <h1>{{film.title}}</h1>
   <p>{{film.opening_crawl}}</p>
-  <ion-list padding>
-    <p item-start>Episode:</p>
-    <p item-end text-end>{{film.episode_id}}</p>
-        <!--
   
-    <p float-left>Release Date:</p>
-    <p float-right>{{film.release_date | date}}</p>
-
-
-    -->
-  </ion-list>
+  <detail-list [detailList]="detailList">
+  </detail-list>
 
 
 

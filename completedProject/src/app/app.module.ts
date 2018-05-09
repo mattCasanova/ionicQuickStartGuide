@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { ApiProvider } from '../providers/api/api';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ApiProvider } from '../providers/api/api';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
