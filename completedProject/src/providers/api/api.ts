@@ -1,3 +1,4 @@
+import { Planet } from './../../models/planet.model';
 import { Person } from './../../models/person.model';
 import { APIResult } from './../../models/api-result.model';
 import { HttpClient } from '@angular/common/http';
@@ -31,25 +32,59 @@ export class ApiProvider {
         onSuccess(apiResult.results);
       }, onError);
   }
-
+  /**
+   * 
+   * @param onSuccess 
+   * @param onError 
+   */
   public getPeople(onSuccess: (people: Person[]) => void, onError: (error: any) => void) {
     const url = ApiProvider.BASE_URL + 'people/';
     let results: Person[] = [];
 
-    
-    const recursiveGet = (apiResult: APIResult) => {
-      results = results.concat(apiResult.results);
-      if(apiResult.next) {
-        this.http.get<APIResult>(apiResult.next).take(1).subscribe(recursiveGet, onError);
-      } else {
-        onSuccess(results);
-      }
-    }
-    
+    this.http.get<APIResult>(url)
+      .take(1)
+      .subscribe((apiResult: APIResult) => {
+        this.getRecursive(apiResult, onSuccess, onError, results);
+      }, 
+      onError
+    );
+  }
+  /**
+   * 
+   */
+  public getPlanets(onSuccess: (planets: Planet[]) => void, onError: (error: any) => void): void {
+    const url = ApiProvider.BASE_URL + 'planets/';
+    let results: Planet[] = [];
 
     this.http.get<APIResult>(url)
       .take(1)
-      .subscribe(recursiveGet, onError);
+      .subscribe((apiResult: APIResult) => {
+        this.getRecursive(apiResult, onSuccess, onError, results);
+      }, 
+      onError
+    );
+
+  } 
+  //public getSpecies(onSuccess: (species: Species[]) =>)
+
+  /**
+   * 
+   */
+  private getRecursive(apiResult: APIResult, onSuccess: (results: any[]) => void, onError: (error: any) => void, results: any[]): void {
+    results = results.concat(apiResult.results);
+
+    if(!apiResult.next) {
+      onSuccess(results);
+      return;
+    }
+
+    this.http.get<APIResult>(apiResult.next)
+      .take(1)
+      .subscribe((response: APIResult) => {
+        this.getRecursive(response, onSuccess, onError, results);
+      }, 
+      onError
+    );
   }
 
 }

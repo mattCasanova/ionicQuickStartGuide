@@ -38,12 +38,12 @@ export class FilmDetailPage {
     const created = datePipe.transform(this.film.created);
     const edited  = datePipe.transform(this.film.edited);
 
-    this.detailList.push(new DetailItem(Strings.EPISODE_LABEL, this.film.episode_id.toString()));
+    this.detailList.push(new DetailItem(Strings.EPISODE_LABEL,       this.film.episode_id.toString()));
     this.detailList.push(new DetailItem(Strings.REALEASE_DATE_LABEL, release));
-    this.detailList.push(new DetailItem(Strings.DIRECTOR_LABEL, this.film.director));
-    this.detailList.push(new DetailItem(Strings.PRODUCER_LABEL, this.film.producer));
-    this.detailList.push(new DetailItem(Strings.CREATED_LABEL, created));
-    this.detailList.push(new DetailItem(Strings.EDITED_LABEL, edited));
+    this.detailList.push(new DetailItem(Strings.DIRECTOR_LABEL,      this.film.director));
+    this.detailList.push(new DetailItem(Strings.PRODUCER_LABEL,      this.film.producer));
+    this.detailList.push(new DetailItem(Strings.CREATED_LABEL,       created));
+    this.detailList.push(new DetailItem(Strings.EDITED_LABEL,        edited));
 
 
 

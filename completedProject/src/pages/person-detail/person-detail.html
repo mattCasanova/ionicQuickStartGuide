@@ -6,13 +6,16 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>PersonDetail</ion-title>
+  <ion-navbar color="secondary">
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <h1>{{person.name}}</h1>
+
+  <detail-list [detailList]="detailList">
+  </detail-list>
 
 </ion-content>
