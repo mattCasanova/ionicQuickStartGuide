@@ -4,6 +4,15 @@ export class Strings {
     //Common Strings
     public static readonly CREATED_LABEL                          = "Resource Created";
     public static readonly EDITED_LABEL                           = "Last Edited:";
+    public static readonly MODEL_LABEL                            = "Model:";
+    public static readonly MANUFACTURER_LABEL                     = "Manufacturer:";
+    public static readonly LENGTH_LABEL                           = "Length (m):";
+    public static readonly COST_IN_CREDITS_LABEL                  = "Cost In Credits:";
+    public static readonly CREW_LABEL                             = "Crew:";
+    public static readonly PASSENGERS_LABEL                       = "Passengers:";
+    public static readonly MAX_ATMOSPHERING_SPEED_LABEL           = "Max Atmosphering Speed:";
+    public static readonly CARGO_CAPACITY_LABEL                   = "Cargo Capacity (kg):";
+    public static readonly TIME_BETWEEN_RESUPPLY_LABEL            = "Time Between Resupply:";
 
     // Film Strings
     public static readonly EPISODE_LABEL                          = "Episode:";
@@ -29,10 +38,24 @@ export class Strings {
     public static readonly CLIMATE_LABEL                          = "Climate:";
     public static readonly TERRAIN_LABEL                          = "Terrain:";
     public static readonly SURFACE_WATER_LABEL                    = "Surface Water (%):";
-
-
-
-
-
+    
+    //Species Strings
+    public static readonly CLASSIFICATION_LABEL                   = "Classification:";
+    public static readonly DESIGNATION_LABEL                      = "Designation";
+    public static readonly AVERAGE_HEIGHT_LABEL                   = "Average Height (cm):";
+    public static readonly AVERAGE_LIFESPAN_LABEL                 = "Average Lifespan (years):";
+    public static readonly EYE_COLORS_LABEL                       = "Eye Colors:";
+    public static readonly HAIR_COLORS_LABEL                      = "Hair Colors:";
+    public static readonly SKIN_COLORS_LABEL                      = "Skin Colors:";
+    public static readonly LANGUAGE_LABEL                         = "Language:";
+    
+    //Vehicle Strings
+    public static readonly VEHICLE_CLASS_LABEL                    = "Vehicle Class:";
+    
+    //Starship Strings
+    public static readonly STARSHIP_CLASS_LABEL                   = "Starship Class:";
+    public static readonly HYPERDRIVE_RATING_LABEL                = "Hypedrive Rating";
+    public static readonly MGTL_LABEL                             = "Megalights Per Hour:";
+    
 
 }

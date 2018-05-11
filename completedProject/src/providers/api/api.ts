@@ -1,3 +1,6 @@
+import { Starship } from './../../models/starship.model';
+import { Vehicle } from './../../models/vehicle.model';
+import { Species } from './../../models/species.model';
 import { Planet } from './../../models/planet.model';
 import { Person } from './../../models/person.model';
 import { APIResult } from './../../models/api-result.model';
@@ -16,12 +19,14 @@ import { Film } from '../../models/film.model';
 export class ApiProvider {
   private static readonly BASE_URL = 'https://swapi.co/api/';
 
-  private films:  Film[]   = [];
-  private people: Person[] = [];
-  private planets: Planet[] = [];
+  private films:     Film[]     = [];
+  private people:    Person[]   = [];
+  private planets:   Planet[]   = [];
+  private species:   Species[]  = [];
+  private vehicles:  Vehicle[]  = [];
+  private starships: Starship[] = [];
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   /**
    * 
@@ -29,12 +34,20 @@ export class ApiProvider {
    * @param onError Closure to call when api returns error
    */
   public getFilms(onSuccess:(films: Film[]) => void, onError: (error: any) => void) {
+    if(this.films.length) {
+      onSuccess(this.films);
+      return;
+    }
+    
     const url = ApiProvider.BASE_URL + 'films/';
     this.http.get<APIResult>(url)
       .take(1)
       .subscribe((apiResult: APIResult) => {
-        onSuccess(apiResult.results);
-      }, onError);
+        this.films = apiResult.results;
+        onSuccess(this.films);
+      }, 
+      onError
+    );
   }
   /**
    * 
@@ -76,8 +89,60 @@ export class ApiProvider {
     );
 
   } 
-  //public getSpecies(onSuccess: (species: Species[]) =>)
+  /**
+   * 
+   */
+  public getSpecies(onSuccess: (species: Species[]) => void, onError: (error: any) => void): void {
+    if(this.species.length) {
+      onSuccess(this.species);
+      return;
+    }
 
+    const url = ApiProvider.BASE_URL + 'species/';
+    this.http.get<APIResult>(url)
+      .take(1)
+      .subscribe((apiResult: APIResult) => {
+        this.getRecursive(apiResult, onSuccess, onError, this.species);
+      },
+      onError
+    );
+  }
+  /**
+   * 
+   */
+  public getVehicles(onSuccess: (species: Vehicle[]) => void, onError: (error: any) => void): void {
+    if(this.vehicles.length) {
+      onSuccess(this.vehicles);
+      return;
+    }
+
+    const url = ApiProvider.BASE_URL + 'vehicles/';
+    this.http.get<APIResult>(url)
+      .take(1)
+      .subscribe((apiResult: APIResult) => {
+        this.getRecursive(apiResult, onSuccess, onError, this.vehicles);
+      },
+      onError
+    );
+  }
+  /**
+   * 
+   */
+  public getStarships(onSuccess: (species: Starship[]) => void, onError: (error: any) => void): void {
+    if(this.starships.length) {
+      onSuccess(this.starships);
+      return;
+    }
+
+    const url = ApiProvider.BASE_URL + 'starships/';
+    this.http.get<APIResult>(url)
+      .take(1)
+      .subscribe((apiResult: APIResult) => {
+        this.getRecursive(apiResult, onSuccess, onError, this.starships);
+      },
+      onError
+    );
+  }
   /**
    * 
    */

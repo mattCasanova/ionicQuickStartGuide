@@ -6,13 +6,18 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>SpeciesList</ion-title>
+  <ion-navbar color='secondary'>
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let item of species" (tap)="onTap(item)">
+      {{item.name}}
+    </button> 
+  </ion-list>
 
 </ion-content>
