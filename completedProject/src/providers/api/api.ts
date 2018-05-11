@@ -14,7 +14,11 @@ import { Film } from '../../models/film.model';
 */
 @Injectable()
 export class ApiProvider {
-  private static readonly BASE_URL = 'https://swapi.co/api/'
+  private static readonly BASE_URL = 'https://swapi.co/api/';
+
+  private films:  Film[]   = [];
+  private people: Person[] = [];
+  private planets: Planet[] = [];
 
   constructor(private http: HttpClient) {
   }
@@ -38,13 +42,17 @@ export class ApiProvider {
    * @param onError 
    */
   public getPeople(onSuccess: (people: Person[]) => void, onError: (error: any) => void) {
+    if(this.people.length){
+      onSuccess(this.people);
+      return;
+    }
+    
+    
     const url = ApiProvider.BASE_URL + 'people/';
-    let results: Person[] = [];
-
     this.http.get<APIResult>(url)
       .take(1)
       .subscribe((apiResult: APIResult) => {
-        this.getRecursive(apiResult, onSuccess, onError, results);
+        this.getRecursive(apiResult, onSuccess, onError, this.people);
       }, 
       onError
     );
@@ -53,13 +61,16 @@ export class ApiProvider {
    * 
    */
   public getPlanets(onSuccess: (planets: Planet[]) => void, onError: (error: any) => void): void {
+    if(this.planets.length) {
+      onSuccess(this.planets);
+      return;
+    }
+    
     const url = ApiProvider.BASE_URL + 'planets/';
-    let results: Planet[] = [];
-
     this.http.get<APIResult>(url)
       .take(1)
       .subscribe((apiResult: APIResult) => {
-        this.getRecursive(apiResult, onSuccess, onError, results);
+        this.getRecursive(apiResult, onSuccess, onError, this.planets);
       }, 
       onError
     );
@@ -71,7 +82,9 @@ export class ApiProvider {
    * 
    */
   private getRecursive(apiResult: APIResult, onSuccess: (results: any[]) => void, onError: (error: any) => void, results: any[]): void {
-    results = results.concat(apiResult.results);
+    for(const item of apiResult.results) {
+      results.push(item);
+    }
 
     if(!apiResult.next) {
       onSuccess(results);
