@@ -42,6 +42,8 @@ export class VehicleDetailPage {
 
     const length      = Utility.getDisplayValue(this.vehicle.length, decimalPipe);
     const cost        = Utility.getDisplayValue(this.vehicle.cost_in_credits, decimalPipe);
+    const crew        = Utility.getDisplayValue(this.vehicle.crew, decimalPipe);
+    const passengers  = Utility.getDisplayValue(this.vehicle.passengers, decimalPipe);
     const cargoCap    = Utility.getDisplayValue(this.vehicle.cargo_capacity, decimalPipe);
     const maxAtmo     = Utility.getDisplayValue(this.vehicle.max_atmosphering_speed, decimalPipe);
 
@@ -51,8 +53,8 @@ export class VehicleDetailPage {
     this.detailList.push(new DetailItem(Strings.MANUFACTURER_LABEL,           this.vehicle.manufacturer));
     this.detailList.push(new DetailItem(Strings.LENGTH_LABEL,                 length));
     this.detailList.push(new DetailItem(Strings.COST_IN_CREDITS_LABEL,        cost));
-    this.detailList.push(new DetailItem(Strings.CREW_LABEL,                   this.vehicle.crew));
-    this.detailList.push(new DetailItem(Strings.PASSENGERS_LABEL,             this.vehicle.passengers));
+    this.detailList.push(new DetailItem(Strings.CREW_LABEL,                   crew));
+    this.detailList.push(new DetailItem(Strings.PASSENGERS_LABEL,             passengers));
     this.detailList.push(new DetailItem(Strings.MAX_ATMOSPHERING_SPEED_LABEL, maxAtmo));
     this.detailList.push(new DetailItem(Strings.CARGO_CAPACITY_LABEL,         cargoCap));
     this.detailList.push(new DetailItem(Strings.TIME_BETWEEN_RESUPPLY_LABEL,  this.vehicle.consumables));

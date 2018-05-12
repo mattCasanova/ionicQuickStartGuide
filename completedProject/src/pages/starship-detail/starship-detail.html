@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>StarshipDetail</ion-title>
+  <ion-navbar color="secondary">
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <h1>{{starship.name}}</h1>
+
+  <detail-list [detailList]="detailList">
+  </detail-list>
 
 </ion-content>
+

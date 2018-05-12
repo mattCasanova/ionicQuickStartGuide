@@ -9,7 +9,7 @@ export class Starship {
     passengers:             string;
     max_atmosphering_speed: string;
     hyperdrive_rating:      string;
-    MGTL:                   string;
+    MGLT:                   string;
     cargo_capacity:         string;
     consumables:            string;
     created:                string;
