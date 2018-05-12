@@ -7,7 +7,7 @@ import { StarshipsListPage } from './starships-list';
     StarshipsListPage,
   ],
   imports: [
-    IonicPageModule.forChild(StarshipsListPage),
+    IonicPageModule.forChild(StarshipsListPage)
   ],
 })
 export class StarshipsListPageModule {}

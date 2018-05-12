@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>StarshipsList</ion-title>
+  <ion-navbar color='secondary'>
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let ship of starships" (tap)="onTap(ship)">
+      {{ship.name}}
+    </button>
+  </ion-list>
 </ion-content>

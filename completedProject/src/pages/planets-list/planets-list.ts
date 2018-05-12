@@ -2,7 +2,7 @@ import { Pages } from './../../Constants/pages.constants';
 import { Planet } from './../../models/planet.model';
 import { Titles } from './../../Constants/titles.constants';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, LoadingController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 
 /**
@@ -39,7 +39,9 @@ export class PlanetsListPage {
     loader.present();
 
     this.api.getPlanets((planets: Planet[]) => {
-     this.planets = planets;
+     this.planets = planets.sort((first: Planet, second: Planet): number => {
+      return first.name.toLocaleLowerCase().localeCompare(second.name.toLocaleLowerCase());
+    });;
      loader.dismiss();
     },
     (error: any) => {

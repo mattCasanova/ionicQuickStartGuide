@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>VehiclesList</ion-title>
+  <ion-navbar color='secondary'>
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let vehicle of vehicles" (tap)="onTap(vehicle)">
+      {{vehicle.name}}
+    </button>
+  </ion-list>
 </ion-content>

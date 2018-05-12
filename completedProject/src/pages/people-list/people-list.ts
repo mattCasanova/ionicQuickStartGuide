@@ -40,7 +40,9 @@ export class PeopleListPage {
     loader.present();
 
     this.api.getPeople((people: Person[]) => {
-      this.people = people;
+      this.people = people.sort((first: Person, second: Person): number => {
+        return first.name.toLocaleLowerCase().localeCompare(second.name.toLocaleLowerCase());
+      });;
       loader.dismiss();
     },
     (error: any) => {

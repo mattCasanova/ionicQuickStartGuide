@@ -1,3 +1,4 @@
+import { Utility } from './../../utility/utility';
 import { Strings } from './../../Constants/strings.constants';
 import { DetailItem } from './../../models/detail-item.model';
 import { Planet } from './../../models/planet.model';
@@ -29,16 +30,16 @@ export class PlanetDetailPage {
    * 
    */
   ionViewDidLoad() {
-
+    const decimalPipe = new DecimalPipe(Strings.PIPE_LOCALE);
     const datePipe   = new DatePipe(Strings.PIPE_LOCALE);
 
     const created  = datePipe.transform(this.planet.created);
     const edited   = datePipe.transform(this.planet.edited);
     
     
-    const orbital  = this.getDisplayValue(this.planet.orbital_period)
-    const diameter = this.getDisplayValue(this.planet.diameter)
-    const pop      = this.getDisplayValue(this.planet.population);
+    const orbital  = Utility.getDisplayValue(this.planet.orbital_period, decimalPipe)
+    const diameter = Utility.getDisplayValue(this.planet.diameter, decimalPipe)
+    const pop      = Utility.getDisplayValue(this.planet.population, decimalPipe);
 
 
 
@@ -53,14 +54,6 @@ export class PlanetDetailPage {
     this.detailList.push(new DetailItem(Strings.CREATED_LABEL,         created));
     this.detailList.push(new DetailItem(Strings.EDITED_LABEL,          edited));
 
-  }
-  /**
-   * 
-   */
-  private getDisplayValue(detail: string): string {
-    const decimalPipe = new DecimalPipe(Strings.PIPE_LOCALE);
-    const value = Number.parseInt(detail);
-    return (!isNaN(value)) ? decimalPipe.transform(detail) : detail;
   }
  
 }

@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { VehiclesListPage } from './vehicles-list';
@@ -7,7 +8,7 @@ import { VehiclesListPage } from './vehicles-list';
     VehiclesListPage,
   ],
   imports: [
-    IonicPageModule.forChild(VehiclesListPage),
+    IonicPageModule.forChild(VehiclesListPage)
   ],
 })
 export class VehiclesListPageModule {}

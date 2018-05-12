@@ -37,7 +37,9 @@ export class FilmsListPage {
     const loader = this.loadingCtrl.create();
     loader.present();
     this.api.getFilms((films: Film[]) => {
-      this.films = films;
+      this.films = films.sort((first: Film, second: Film): number => {
+        return first.title.toLocaleLowerCase().localeCompare(second.title.toLocaleLowerCase());
+      });;
       loader.dismiss();
     },
     (error: any) => {
